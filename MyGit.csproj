@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MyGit</RootNamespace>
+    <AssemblyName>MyGit</AssemblyName>
+    <!-- 嵌入的 DarkTerminalUI 子目录只作为被引用项目编译，不纳入本项目的默认文件项 -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);DarkTerminalUI\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="DarkTerminalUI\DarkTerminalUI.csproj" />
+  </ItemGroup>
+
+</Project>

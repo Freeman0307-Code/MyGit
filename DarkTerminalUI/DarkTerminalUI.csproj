@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>DarkTerminalUI</RootNamespace>
+    <AssemblyName>DarkTerminalUI</AssemblyName>
+
+    <!-- NuGet 打包信息：dotnet pack -c Release 即可产出 nupkg 供其他项目引用 -->
+    <PackageId>DarkTerminalUI</PackageId>
+    <Version>1.0.0</Version>
+    <Description>深色终端风格 WinForms UI 库：GameColor / ICanvas2D / GdiCanvas / 主题调色板 / 日志控制台 / 终端风格窗体（来自 PositionDemo / TinyAI / XiangqiAI 的公共 UI 风格）。</Description>
+    <Authors>zcodePrograme</Authors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+</Project>
