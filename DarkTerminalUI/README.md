@@ -101,7 +101,7 @@ global using DarkTerminalUI;
 
 ## 目标框架
 
-`net9.0-windows` + WinForms。
+`net9.0-windows` + WinForms。**只适用于 Windows**（Linux / macOS 不可用）。
 
 ---
 
@@ -204,4 +204,4 @@ then `dotnet add package DarkTerminalUI`.
 
 ## Target Framework
 
-`net9.0-windows` + WinForms.
+`net9.0-windows` + WinForms. **Windows only** (Linux / macOS are not supported).

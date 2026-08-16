@@ -5,9 +5,14 @@
 把项目目录当成「游戏进度」来管理：**存档 = 完整快照，读档 = 整体还原**。
 Manage a project directory like game progress: **Save = full snapshot, Load = full restore**.
 
+> ⚠️ **只适用于 Windows / Windows only**（WinForms · `net9.0-windows`）：开发与运行都需要 Windows；
+> 发布的自包含 exe 适用于 Windows x64（可用其他 RID 发布 arm64/x86 版本）。Linux / macOS 不支持。
+
 ---
 
 # 中文
+
+> ⚠️ **只适用于 Windows**（WinForms · `net9.0-windows`），Linux / macOS 不可用。
 
 快照引擎完全自研（纯文件复制，不依赖 git），UI 基于 [DarkTerminalUI](DarkTerminalUI/README.md)
 （深色终端风格 + 右侧日志控制台），左侧为游戏风自绘画布。
@@ -23,6 +28,7 @@ Manage a project directory like game progress: **Save = full snapshot, Load = fu
 ## 快速开始
 
 双击 `run.bat`（自动编译并启动；仅编译用 `build.bat`）。
+需要 .NET 9 SDK；没有 SDK 的电脑请用「免环境运行」一节发布的 `MyGit.exe`。
 
 **A. 管理一个全新项目**
 
@@ -120,6 +126,19 @@ Manage a project directory like game progress: **Save = full snapshot, Load = fu
 | `--shot <路径>` | 启动后自动截图保存并退出（生成界面预览） |
 | `--selftest` | 快照引擎自检（结果写 stdout 与 `bin\...\selftest.log`） |
 
+## 免环境运行（自包含发布）
+
+源码形态**编译**需要 .NET 9 SDK，但**运行**可以完全不需要任何 C# 环境：
+
+1. 在有 SDK 的电脑上双击 `publish.bat`（或执行
+   `dotnet publish MyGit.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true`）；
+2. 产出 `publish\win-x64\MyGit.exe`（约 48 MB，运行时已打包进 exe）；
+3. 把 `publish\win-x64` 文件夹拷到**任何 Windows x64 电脑**，双击 `MyGit.exe` 即可运行 ——
+   无需安装 .NET / SDK / C# 环境；配置与项目库生成在 exe 所在目录，整个文件夹可随意搬走。
+
+> 需要其他平台（win-arm64 / win-x86）时，把 `-r win-x64` 换成对应 RID 重新发布即可。
+> WinForms 仅支持 Windows；Linux/macOS 不可用。
+
 ## 项目结构
 
 | 文件 | 作用 |
@@ -130,6 +149,7 @@ Manage a project directory like game progress: **Save = full snapshot, Load = fu
 | `SavePoint.cs` | 存档元数据读写 |
 | `Config.cs` | 应用配置（项目库目录 / 上次打开的项目 / 外部项目登记） |
 | `SelfTest.cs` | 引擎自检（`--selftest`） |
+| `run.bat` / `build.bat` / `publish.bat` | 双击运行 / 仅编译 / 发布自包含单文件 exe |
 | `DarkTerminalUI\` | 嵌入的 UI 引擎库（深色终端风格窗体 + 控制台） |
 
 ## 与 git 的区别
@@ -140,6 +160,8 @@ MyGit 不是 git：无分支合并、无 diff 工具、按完整快照存档。�
 ---
 
 # English
+
+> ⚠️ **Windows only** (WinForms · `net9.0-windows`); Linux / macOS are not supported.
 
 The snapshot engine is fully self-written (pure file copy, no git dependency). The UI is built on
 [DarkTerminalUI](DarkTerminalUI/README.md) (dark-terminal style + docked log console), with a game-style
@@ -158,6 +180,7 @@ self-drawn canvas on the left.
 ## Quick Start
 
 Double-click `run.bat` (builds and runs; `build.bat` builds only).
+Requires the .NET 9 SDK; for machines without it, use the `MyGit.exe` from "Run Without .NET".
 
 **A. Manage a brand-new project**
 
@@ -261,6 +284,20 @@ Type `help` for a Chinese description of every command (`help <name>` for a sing
 | `--shot <path>` | Save a screenshot at startup and exit (UI preview) |
 | `--selftest` | Run the snapshot-engine self-test (results to stdout and `bin\...\selftest.log`) |
 
+## Run Without .NET (Self-contained Publish)
+
+Building from source requires the .NET 9 SDK, but **running needs no C# environment at all**:
+
+1. On a machine with the SDK, double-click `publish.bat` (or run
+   `dotnet publish MyGit.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true`);
+2. It produces `publish\win-x64\MyGit.exe` (~48 MB, the runtime is bundled inside the exe);
+3. Copy the `publish\win-x64` folder to **any Windows x64 machine** and double-click `MyGit.exe` —
+   no .NET / SDK / C# install needed. Config and the project library are created next to the exe,
+   so the whole folder is portable.
+
+> For other platforms (win-arm64 / win-x86), republish with the matching RID instead of `win-x64`.
+> WinForms is Windows-only; Linux/macOS are not supported.
+
 ## Project Layout
 
 | File | Role |
@@ -271,6 +308,7 @@ Type `help` for a Chinese description of every command (`help <name>` for a sing
 | `SavePoint.cs` | Save metadata I/O |
 | `Config.cs` | App config (project library dir / last opened project / external project registry) |
 | `SelfTest.cs` | Engine self-test (`--selftest`) |
+| `run.bat` / `build.bat` / `publish.bat` | Run / build-only / publish a self-contained single-file exe |
 | `DarkTerminalUI\` | Embedded UI engine library (dark-terminal window + console) |
 
 ## Difference from git
